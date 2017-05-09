@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app01">
+<head>
+    <title></title>
+    <script src="js/angular.js"></script>
+    <script src="scripts/app.js"></script>
+    <style type="text/css">
+        #withCSS, #withCSS th , #withCSS td {
+          border: 1px solid grey;
+          border-collapse: collapse;
+          padding: 5px;
+        }
+        #withCSS tr:nth-child(odd) {
+          background-color: #f1f1f1;
+        }
+        #withCSS tr:nth-child(even) {
+          background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="controller1">
+        <h1>Displaying Data in a Table</h1>
+        <hr/>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="row in Collection.records">
+                <td>{{ row.Name }}</td>
+                <td>{{ row.City }}</td>
+                <td>{{ row.Country }}</td>
+            </tr>
+        </table>
+        <br/>
+        <h1>Displaying with CSS Style</h1>
+        <hr/>
+        <table id="withCSS">
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="row in Collection.records">
+                <td>{{ row.Name }}</td>
+                <td>{{ row.City }}</td>
+                <td>{{ row.Country }}</td>
+            </tr>
+        </table>
+        <br/>
+        <h1>Display with orderBy Filter</h1>
+        <hr/>
+        <table id="withCSS">
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="row in Collection.records | orderBy: 'Country'">
+                <td>{{ row.Name }}</td>
+                <td>{{ row.City }}</td>
+                <td>{{ row.Country }}</td>
+            </tr>
+        </table>
+        <br/>
+        <h1>Display city with lowercase and Country with uppercase using Filter</h1>
+        <hr/>
+        <table id="withCSS">
+            <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="row in Collection.records">
+                <td>{{ row.Name }}</td>
+                <td>{{ row.City | lowercase }}</td>
+                <td>{{ row.Country | uppercase }}</td>
+            </tr>
+        </table>
+        <br/>
+        <h1>Display the Table Index ($index)</h1>
+        <hr/>
+        <table id="withCSS">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="row in Collection.records">
+                <td>{{ ($index + 1) }}
+                <td>{{ row.Name }}</td>
+                <td>{{ row.City | lowercase }}</td>
+                <td>{{ row.Country | uppercase }}</td>
+            </tr>
+        </table>
+        <br/>
+        <h1>Using $even and $odd by using ng-if directive</h1>
+        <hr/>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="row in Collection.records">
+                <!-- set even and odd td -->
+                <td ng-if="$odd" style="background-color: #f1f1f1">{{ ($index + 1) }}</td>
+                <td ng-if="$even">{{ ($index + 1) }}</td>
+
+                <td ng-if="$odd" style="background-color: #f1f1f1">{{ row.Name }}</td>
+                <td ng-if="$even">{{ row.Name }}</td>
+
+                <td ng-if="$odd" style="background-color: #f1f1f1">{{ row.City | lowercase }}</td>
+                <td ng-if="$even">{{ row.City | lowercase }}</td>
+
+                <td ng-if="$odd" style="background-color: #f1f1f1">{{ row.Country | uppercase }}</td>
+                <td ng-if="$even">{{ row.Country | uppercase }}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
